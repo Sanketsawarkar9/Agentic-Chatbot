@@ -1,7 +1,10 @@
 from configparser import ConfigParser
+import os
 
 class Config:
-    def __init__(self, config_file="C:\\AgenticChatbot\\src\\langgraphagenticai\\ui\\uiconfigfile.ini"):
+    def __init__(self, config_file=None):
+        if config_file is None:
+            config_file = os.path.join(os.path.dirname(__file__), "uiconfigfile.ini")
         self.config = ConfigParser()
         self.config.read(config_file)
 

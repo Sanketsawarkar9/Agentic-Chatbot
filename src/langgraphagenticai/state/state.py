@@ -1,5 +1,6 @@
 from typing_extensions import TypedDict,List
 from langgraph.graph.message import add_messages
+from langchain_core.messages import BaseMessage
 from typing import Annotated
 
 
@@ -11,4 +12,4 @@ class State(TypedDict):
         TypedDict (_type_): _description_
     """
     
-    messages:Annotated[List,add_messages]
+    messages: Annotated[List[BaseMessage], add_messages]

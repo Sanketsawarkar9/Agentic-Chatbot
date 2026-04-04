@@ -15,11 +15,23 @@ class DisplayResultStreamlit:
         user_message = self.user_message
         print(user_message)
         if usecase =="Basic Chatbot":
-                for event in graph.stream({'messages':("user",user_message)}):
+                for event in graph.stream({'messages': [HumanMessage(content=user_message)]}):
                     print(event.values())
                     for value in event.values():
                         print(value['messages'])
                         with st.chat_message("user"):
                             st.write(user_message)
                         with st.chat_message("assistant"):
-                            st.write(value["messages"].content)
+                            if value["messages"]:
+                                st.write(value["messages"][-1].content)
+                            
+        elif usecase =="Chatbot With Web":
+            for event in graph.stream({'messages': [HumanMessage(content=user_message)]}):
+                print(event.values())
+                for value in event.values():
+                    print(value['messages'])
+                    with st.chat_message("user"):
+                        st.write(user_message)
+                    with st.chat_message("assistant"):
+                        if value["messages"]:
+                            st.write(value["messages"][-1].content)
